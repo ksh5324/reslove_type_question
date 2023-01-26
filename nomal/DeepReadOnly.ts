@@ -7,7 +7,10 @@ type X = {
 };
 
 type DeepReadonly<T> = {
-  readonly [t in keyof T]: T[t] extends {} ? DeepReadonly<T[t]> : T[t];
+  readonly [t in keyof T]: T[t] extends Record<any, unknown>
+    ? DeepReadonly<T[t]>
+    : T[t];
 };
 
-type Todo = DeepReadonly<X>;
+type Result = DeepReadonly<X>;
+type ObjectType = Record<any, unknown>;

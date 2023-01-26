@@ -1,4 +1,13 @@
 declare const config: Chainable;
+declare const config2: Chainable2;
+
+type Chainable2<T extends Record<string, any> = {}> = {
+  option(
+    key: string,
+    value: any
+  ): Chainable2<{ [t in keyof T]: T[t] } & { [v in string]: any }>;
+  get(): T;
+};
 
 type Chainable<T extends Record<string, any> = {}> = {
   option<Key extends string, Value extends any>(
